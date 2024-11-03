@@ -54,7 +54,7 @@ class User extends CI_Controller {
 			//var_dump($upload_image);
 			//die;
 
-			if($upload_image) {
+			if($upload_image) { 
 				$config['allowed_types'] = 'gif|jpg|png';
 				$config['max_size'] = '2048';
 				$config['upload_path'] = './assets/img/';

@@ -36,12 +36,23 @@ class Admin extends CI_Controller {
 
 		$data['role'] = $this->db->get('user_role')->result_array();
 
-		$this->load->view('templates/header', $data);
-		$this->load->view('templates/sidebar', $data);
-		$this->load->view('templates/topbar', $data);
-		$this->load->view('admin/role', $data);
-		$this->load->view('templates/footer');
-        //echo 'Selamat datang ' . $data['user']['name'];
+		$this->form_validation->set_rules('role', 'Role', 'required');
+
+		if($this->form_validation->run() == false) {
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('admin/role', $data);
+			$this->load->view('templates/footer');
+			//echo 'Selamat datang ' . $data['user']['name'];
+		}
+
+		else {
+			$this->db->insert('user_role', ['role' => $this->input->post('role')]);
+            $this->session->set_flashdata('message','<div class="alert alert-success" role="alert">New role added!</div>');
+            redirect('admin/role');
+		}
+
 	}
 
 	public function roleAccess($role_id)
@@ -83,5 +94,35 @@ class Admin extends CI_Controller {
 		}
 
 		$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Access Changed!</div>');
+	}
+
+	public function edit($role_id){
+		$data['title'] = 'Edit Role';
+        $data['user'] = $this->db->get_where('user', ['email'=> 
+        $this->session->userdata('email')])->row_array();
+		
+		$data['role'] = $this->db->get_where('user_role', ['id' => $role_id])->row_array();
+
+		$this->form_validation->set_rules('role', 'Role Name', 'required|trim');
+
+		if($this->form_validation->run() == false) {
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('admin/edit', $data);
+			$this->load->view('templates/footer');
+			//echo 'Selamat datang ' . $data['user']['name'];
+		}
+
+		else {
+			$role = $this->input->post('role');
+			$email = $this->input->post('email');
+
+			$this->db->set('role', $role);
+			$this->db->where('email', $email);
+			$this->db->update('user_role');
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Your role has been updated!</div>');
+			redirect('admin/role');
+		}
 	}
 }

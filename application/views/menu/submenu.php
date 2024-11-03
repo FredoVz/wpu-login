@@ -42,7 +42,7 @@
                             <td><?= $sm['icon']; ?></td>
                             <td><?= $sm['is_active']; ?></td>
                             <td>
-                                <a href="" class="badge badge-success">edit</a>
+                                <a href="<?= base_url('menu/submenuedit/') . $sm['id']; ?>" class="badge badge-success">edit</a>
                                 <a href="" class="badge badge-danger">delete</a>
                             </td>
                         </tr>

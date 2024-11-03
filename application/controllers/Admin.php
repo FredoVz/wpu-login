@@ -125,4 +125,9 @@ class Admin extends CI_Controller {
 			redirect('admin/role');
 		}
 	}
+
+	public function delete($role_id)
+	{
+		echo "Your role has been deleted!";
+	}
 }

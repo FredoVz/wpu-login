@@ -151,4 +151,14 @@ class Menu extends CI_Controller {
 			redirect('menu/submenu');
 		}
 	}
+
+	public function delete($menu_id)
+	{
+		echo "Your menu has been deleted!";
+	}
+
+	public function submenuDelete($submenu_id)
+	{
+		echo "Your sub menu has been deleted!";
+	}
 }

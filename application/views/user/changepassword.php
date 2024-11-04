@@ -12,17 +12,17 @@
 			<form action="<?= base_url('user/changepassword'); ?>" method="post">
 				<div class="form-group">
                     <label for="current_password">Current Password</label>
-                    <input type="password" class="form-control" id="current_password" name="current_password">
+                    <input type="password" class="form-control" id="current_password" name="current_password" required>
 					<?= form_error('current_password', '<small class="text-danger">', '</small>'); ?>
                 </div>
 				<div class="form-group">
                     <label for="new_password1">New Password</label>
-                    <input type="password" class="form-control" id="new_password1" name="new_password1">
+                    <input type="password" class="form-control" id="new_password1" name="new_password1" required>
 					<?= form_error('new_password1', '<small class="text-danger">', '</small>'); ?>
                 </div>
 				<div class="form-group">
                     <label for="new_password2">Repeat Password</label>
-                    <input type="password" class="form-control" id="new_password2" name="new_password2">
+                    <input type="password" class="form-control" id="new_password2" name="new_password2" required>
 					<?= form_error('new_password2', '<small class="text-danger">', '</small>'); ?>
                 </div>
 				<div class="form-group">
